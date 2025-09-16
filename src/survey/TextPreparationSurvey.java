@@ -1,0 +1,106 @@
+package survey;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * アンケート調査用の文書を準備するクラス
+ */
+public class TextPreparationSurvey {
+    private List<String> contentList = new ArrayList<>();
+    
+    /**
+     * コンストラクタ。アンケートの内容を作成する。
+     * タグを使用して各種動作を指定。
+     */
+    public TextPreparationSurvey() {
+
+        /* 最初のメッセージ */
+        this.contentList.add(
+            "{text}\n"
+            + "2025年度 １学期末アンケート\n"
+            + "在校生の皆様、１学期の履修大変お疲れ様でした。\n"
+            + "大原学園では、より良い教育を提供することを目的に、定期的に授業評価をおこなっておりますので、ご協力をお願いいたします。\n"
+            + "なお、担当教員が皆様に求める授業履修の姿勢や生活指導を厳しく感じられた方もおられると思いますが、教育信条・ディプロマポリシーに掲げるとおり、\n"
+            + "学生の皆様が卒業後に社会で活躍できる人材となれるように成長を求め続けることが大原学園の教育であることをご理解のうえ、授業評価をお願いいたします。\n"
+            + "{/text}\n"
+            + "{next}\n"
+            + "1\n"
+            + "{/next}\n"
+        );
+
+        /* 1つ目の質問 */
+        this.contentList.add(
+            "{text}\n"
+            + "【1】今学期(4月から7月)の学習・授業について、総合的な満足度を選択してください。*\n"
+            + "{/text}\n"
+            + "{singleChoiceJump}\n"
+            + "{2}1.満足{/2/}\n"
+            + "{2}2.どちらかと言えば満足{/2/}\n"
+            + "{4}3.どちらとも言えない{/4/}\n"
+            + "{3}4.どちらかと言えば不満足{/3/}\n"
+            + "{3}5.不満足{/3/}\n"
+            + "{/singleChoiceJump}\n"
+        );
+
+        /* 1つ目の質問の満足傾向 */
+        this.contentList.add(
+            "{text}\n"
+            + "「満足」、「どちらかといえば満足」を選択した方のみ回答してください。\n"
+            + "満足度が高い要因として当てはまるものを、最大で3つ選んでください\n"
+            + "{/text}\n"
+            + "{multipleChoice}\n"
+            + "1.学習内容や授業が良かった\n" + "2.教材が良かった\n"
+            + "3.担当教員が良かった\n" + "4.試験結果・テスト結果が良かった\n"
+            + "5.実践的なスキルが身についた\n" + "6.行事やイベントが良かった\n"
+            + "7.友人関係や学校生活が良かった\n"
+            + "{/multipleChoice}\n"
+            + "{next}\n"
+            + "4\n"
+            + "{/next}\n"
+        );
+
+        /* 1つ目の質問の不満足傾向 */
+        this.contentList.add(
+            "{text}\n"
+            + "「不満足」、「どちらかといえば不満足」を選択した方のみ回答してください。\n"
+            + "不満足度が高い要因として当てはまるものを、最大で3つ選んでください\n"
+            + "{/text}\n"
+            + "{multipleChoice}\n"
+            + "1.学習内容や授業が良くなかった\n" + "2.教材学良くなかった\n"  
+            + "3.担当教員が良くなかった\n" + "4.試験結果・テスト結果が良くなかった\n"
+            + "5.実践的なスキルが身に付かなかった\n" + "6.行事やイベントが良くなかった\n"
+            + "7.友人関係や学校生活が良くなかった\n"
+            + "{/multipleChoice}\n"
+            + "{next}\n"
+            + "4\n"
+            + "{/next}\n"
+        );
+
+        /* 最後のメッセージ */
+        this.contentList.add(
+            "{text}\n"
+            + "アンケートへのご協力ありがとうございました。\n"  
+            + "{/text}\n"
+            + "{EOF}\n"
+        );
+    }
+    
+    /**
+     * this.contentListの内容を返す
+     * @param i index番号
+     * @return
+     */
+    public String getContent(int i) {
+        return this.contentList.get(i);
+    }
+
+    /**
+     * hits.contentListのサイズを返す
+     * @return contentListのサイズ
+     */
+    public int getSize() {
+    	return this.contentList.size();
+    }
+    
+}
