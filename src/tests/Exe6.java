@@ -1,4 +1,4 @@
-package util;
+package tests;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,12 +6,11 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
-import execute.Extraction;
+import common.Extraction;
 import survey.SurveyTags;
 
-public class Exe9 {
+public class Exe6 {
 
 	public static void main(String[] args) {
 
@@ -26,8 +25,6 @@ public class Exe9 {
    		String content = "";
    		String nextString = "";
    		int nextNo = 0;
-   		
-		Scanner scanner = new Scanner(System.in);
    		
    		// データ準備
    		TextPreparationSurveyBK tps = new TextPreparationSurveyBK(); 
@@ -59,6 +56,13 @@ public class Exe9 {
 		
 			// nextタグのコンテンツを取得
 			nextString = ext.extContent(target, "{"+stNext+"}", "{/"+stNext+"}");
+//			// テストバージョン　stSCJはnextタグがない
+//			if (Objects.isNull(nextString) || nextString.isEmpty()) {
+//				nextNo = 2; 
+//			} else {
+//				// nextタグのコンテンツを改行コードを削除し取得
+//				nextNo = Integer.parseInt(nextString.replace("\n", ""));
+//			}  
 			
 			// singleChoiceJump
 			if (target.contains(stSCJ)) {
@@ -70,8 +74,7 @@ public class Exe9 {
 	    		BufferedReader br = new BufferedReader(new StringReader(contentSCJ));
 	    		Map<String, ArrayList<String>> mapSCJ = new HashMap<String, ArrayList<String>>();
 
-   	    		try {	    
-
+   	    		try {	    			
    	    			String line = br.readLine();
    	    			while (line != null) {
    	    				// 行先頭の次質問indexを取得
@@ -79,14 +82,12 @@ public class Exe9 {
    	    				// 選択肢の表示部を取得
    	    				String textSCJ = ext.extContent(line, "}", "{/");
    	    				
-   	    				// 選択肢Mapを作成（key:選択肢番号、value（配列[0:質問内容　1:next]))
+   	    				// 選択肢Mapを作成（key:選択肢番号、value（key:
    	    				int branchIdx = textSCJ.indexOf(".");
    	    				String branch = textSCJ.substring(0, branchIdx);
-   	    				// value部の配列
    	    				ArrayList<String> listSCJ = new ArrayList<String>();
    	    				listSCJ.add(textSCJ);
    	    				listSCJ.add(nextString);
-   	    				// mapに追加
    	    				mapSCJ.put(branch, listSCJ);
 
    	    				line = br.readLine();
@@ -94,25 +95,11 @@ public class Exe9 {
    	    			
    	    			// 選択肢出力
 	    			for (String key : mapSCJ.keySet()) {
-   	    				ArrayList<String> dispSCJ = new ArrayList<String>();  
-   	    				dispSCJ = mapSCJ.get(key);
-	    				System.out.println(dispSCJ.get(0) + " next:" + dispSCJ.get(1));
+   	    				ArrayList<String> listSCJ = new ArrayList<String>();  
+   	    				listSCJ = mapSCJ.get(key);
+	    				System.out.println(listSCJ.get(0));
    	    			}
-	    			System.out.println("選択肢を入力してくさい：");
-	    			
-	    			// 入力チェック
-	    		    String regex = "[1-5]"; 
-	    			InputCheck ic = new InputCheck(); 
-	    			String inputSelect = scanner.next();
-	    			
-	    			// 正常に入力するまでループ			
-	    			while (!ic.inputCheck(inputSelect, regex)) {
-//	    				System.out.println(inputSelect + " " + ic.inputCheck(inputSelect, regex));
-	    				System.out.println("入力エラーです。再入力してください：");
-	    				inputSelect = scanner.next();
-	    			}
-	    			// 次の質問へのジャンプ番号を取得
-	    			nextString = mapSCJ.get(inputSelect).get(1);
+	    			nextString = "3";
 				
    	    		} catch(IOException e) {
    	   	    		System.out.println(e);
@@ -123,29 +110,15 @@ public class Exe9 {
 				// multipleChoiceの選択肢部を取得
 	    		String contentMC = ext.extContent(target, "{multipleChoice}\n", "{/multipleChoice}");
 				System.out.println(contentMC);
-				
-    			System.out.println("選択肢を入力してください（最大回答数3　例：1,2,3：");
-    			
-    			// 入力チェック
-    		    String regex = "^[1-7{1}&,]{0,4}[1-7]{1}$";; 
-    			InputCheck ic = new InputCheck(); 
-    			String inputSelect = scanner.next();
-    			
-    			// 正常に入力するまでループ			
-    			while (!ic.inputCheck(inputSelect, regex)) {
-//    				System.out.println(inputSelect + " " + ic.inputCheck(inputSelect, regex));
-    				System.out.println("入力エラーです。再入力してください：");
-    				inputSelect = scanner.next();
-    			}
 			
+			// next
 			}
-			
 			// nextタグのコンテンツを改行コードを削除し取得
 			nextNo = Integer.parseInt(nextString.replace("\n", ""));
-//			System.out.println("next: " + nextNo);
+			System.out.println("next: " + nextNo);
+			
 			
 		}
-		scanner.close();
 		
 	}
 }

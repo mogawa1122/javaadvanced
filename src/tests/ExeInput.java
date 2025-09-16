@@ -1,4 +1,4 @@
-package util.bkup;
+package tests;
 
 public class ExeInput {
 

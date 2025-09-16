@@ -1,4 +1,4 @@
-package util;
+package tests;
 
 /**
  * タグの情報を取得するするクラス

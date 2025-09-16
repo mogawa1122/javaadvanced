@@ -1,4 +1,4 @@
-package util;
+package tests;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,11 +6,11 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
-import execute.Extraction;
 import survey.SurveyTags;
 
-public class Exe6 {
+public class Exe7 {
 
 	public static void main(String[] args) {
 
@@ -25,6 +25,8 @@ public class Exe6 {
    		String content = "";
    		String nextString = "";
    		int nextNo = 0;
+   		
+		Scanner scanner = new Scanner(System.in);
    		
    		// データ準備
    		TextPreparationSurveyBK tps = new TextPreparationSurveyBK(); 
@@ -56,13 +58,6 @@ public class Exe6 {
 		
 			// nextタグのコンテンツを取得
 			nextString = ext.extContent(target, "{"+stNext+"}", "{/"+stNext+"}");
-//			// テストバージョン　stSCJはnextタグがない
-//			if (Objects.isNull(nextString) || nextString.isEmpty()) {
-//				nextNo = 2; 
-//			} else {
-//				// nextタグのコンテンツを改行コードを削除し取得
-//				nextNo = Integer.parseInt(nextString.replace("\n", ""));
-//			}  
 			
 			// singleChoiceJump
 			if (target.contains(stSCJ)) {
@@ -97,9 +92,15 @@ public class Exe6 {
 	    			for (String key : mapSCJ.keySet()) {
    	    				ArrayList<String> listSCJ = new ArrayList<String>();  
    	    				listSCJ = mapSCJ.get(key);
-	    				System.out.println(listSCJ.get(0));
+	    				System.out.println(listSCJ.get(0) + " next:" + listSCJ.get(1));
    	    			}
-	    			nextString = "3";
+	    			System.out.println("入力：");
+	    			String inputSelect = scanner.next();
+	    			nextString = mapSCJ.get(inputSelect).get(1);
+//	    			nextString = "3";
+//	    			DispCtrl dc = new DispCtrl();
+//	    			String inputSelect = dc.dispSentence("入力：");
+//	    			nextString = mapSCJ.get(inputSelect).get(1);
 				
    	    		} catch(IOException e) {
    	   	    		System.out.println(e);
@@ -110,15 +111,23 @@ public class Exe6 {
 				// multipleChoiceの選択肢部を取得
 	    		String contentMC = ext.extContent(target, "{multipleChoice}\n", "{/multipleChoice}");
 				System.out.println(contentMC);
+				
+    			System.out.println("入力：");
+    			String inputSelect = scanner.next();
+    			System.out.println(inputSelect);
+				
+//    			DispCtrl dc2 = new DispCtrl();
+//    			String inputSelect2 = dc2.dispSentence("入力2：");
+//				System.out.println(inputSelect2);
 			
-			// next
 			}
+			
 			// nextタグのコンテンツを改行コードを削除し取得
 			nextNo = Integer.parseInt(nextString.replace("\n", ""));
 			System.out.println("next: " + nextNo);
 			
-			
 		}
+		scanner.close();
 		
 	}
 }

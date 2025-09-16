@@ -1,4 +1,4 @@
-package util.bkup;
+package tests;
 
 /**
  * タグの情報を取得するするクラス

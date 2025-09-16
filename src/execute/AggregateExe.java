@@ -6,6 +6,8 @@ import java.util.Map;
 
 import aggregate.AggregateTags;
 import aggregate.TextPreparationAggregate;
+import common.DisplayAnswers;
+import common.GetAnswer;
 
 public class AggregateExe {
 

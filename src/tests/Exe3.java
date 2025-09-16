@@ -1,4 +1,4 @@
-package util;
+package tests;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.io.StringReader;
 
 import survey.SurveyTags;
 
-public class Exe4 {
+public class Exe3 {
 
 	public static void main(String[] args) {
 
@@ -27,32 +27,15 @@ public class Exe4 {
    	    		BufferedReader br = new BufferedReader(new StringReader(content));
    	 
    	    		String line = br.readLine();
-	    		GetTagInfo tc = new GetTagInfo();
-	    		String tagName = tc.getTagContent(line);
-	    		System.out.println("tagName:" + tagName);
-   	    		
-	    		if (tagName.equals(stText.toString())) {
+   	    		while (line != null) {
+   	    			System.out.println(line);
+   	    			
+   	    			GetTagInfo tc = new GetTagInfo();
+   	    			String tagContent = tc.getTagContent(line);
+   	    			System.out.println("tagContent:" + tagContent);
+   	    			
    	    			line = br.readLine();
-   	    			int idx = line.indexOf("{");
-   	    			System.out.println("idx: " + idx);
-//	   	    		while ((line != null) || (idx !=-1)) {
-	   	    		while ((line != null) || (idx !=-1)) {
-	   	    			System.out.println("line: " + line);
-	   	    			line = br.readLine();
-	   	    			idx = line.indexOf("{");
-	   	    			System.out.println("idx: " + idx);
-	   	    		}
-	    		}
-   	    		
-//   	    		while (line != null) {
-//   	    			System.out.println(line);
-//   	    			
-//   	    			GetTagInfo tc = new GetTagInfo();
-//   	    			String tagContent = tc.getTagContent(line);
-//   	    			System.out.println("tagContent:" + tagContent);
-//   	    			
-//   	    			line = br.readLine();
-//   	    		}
+   	    		}
    	    		br.close();
    	    	} catch (IOException e) {
    	    		System.out.println(e);

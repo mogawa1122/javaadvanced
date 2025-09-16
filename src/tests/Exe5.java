@@ -1,6 +1,6 @@
-package util;
+package tests;
 
-import execute.Extraction;
+import common.Extraction;
 import survey.SurveyTags;
 
 public class Exe5 {

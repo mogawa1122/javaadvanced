@@ -1,4 +1,4 @@
-package util.bkup;
+package tests;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,8 +7,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import survey.SurveyTags;
-import util.GetTagInfo;
-import util.TextPreparationSurveyBK;
 
 public class Exe2 {
 

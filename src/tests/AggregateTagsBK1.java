@@ -1,4 +1,4 @@
-package util;
+package tests;
 
 public enum AggregateTagsBK1 {
 

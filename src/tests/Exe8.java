@@ -1,4 +1,4 @@
-package util;
+package tests;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,10 +7,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import common.Extraction;
 import survey.SurveyTags;
 
-public class Exe7 {
+public class Exe8 {
 
 	public static void main(String[] args) {
 
@@ -77,12 +80,14 @@ public class Exe7 {
    	    				// 選択肢の表示部を取得
    	    				String textSCJ = ext.extContent(line, "}", "{/");
    	    				
-   	    				// 選択肢Mapを作成（key:選択肢番号、value（key:
+   	    				// 選択肢Mapを作成（key:選択肢番号、value（配列[0:質問内容　1:next]))
    	    				int branchIdx = textSCJ.indexOf(".");
    	    				String branch = textSCJ.substring(0, branchIdx);
+   	    				// value部の配列
    	    				ArrayList<String> listSCJ = new ArrayList<String>();
    	    				listSCJ.add(textSCJ);
    	    				listSCJ.add(nextString);
+   	    				// mapに追加
    	    				mapSCJ.put(branch, listSCJ);
 
    	    				line = br.readLine();
@@ -95,12 +100,21 @@ public class Exe7 {
 	    				System.out.println(listSCJ.get(0) + " next:" + listSCJ.get(1));
    	    			}
 	    			System.out.println("入力：");
+	    			
+	    			// 入力例の正規表現設定
+	    		    String regexSingle = "[1-5]"; 
+	    		    Pattern patternSingle = Pattern.compile(regexSingle);
+	    			
 	    			String inputSelect = scanner.next();
-	    			nextString = mapSCJ.get(inputSelect).get(1);
-//	    			nextString = "3";
-//	    			DispCtrl dc = new DispCtrl();
-//	    			String inputSelect = dc.dispSentence("入力：");
-//	    			nextString = mapSCJ.get(inputSelect).get(1);
+	    			
+	    			// 入力内容をマッチング
+	    			Matcher matcherSingle = patternSingle.matcher(inputSelect);
+	    			if (matcherSingle.matches()) {
+	    				System.out.println(inputSelect + " OK");
+		    			nextString = mapSCJ.get(inputSelect).get(1);
+	    			} else {
+	    				System.out.println(inputSelect + " NG");
+	    			}
 				
    	    		} catch(IOException e) {
    	   	    		System.out.println(e);
@@ -112,13 +126,21 @@ public class Exe7 {
 	    		String contentMC = ext.extContent(target, "{multipleChoice}\n", "{/multipleChoice}");
 				System.out.println(contentMC);
 				
-    			System.out.println("入力：");
+    			System.out.println("入力（最大回答数3　例：1,2,3：");
+    			
+    			// 入力例の正規表現設定
+    		    String regexMulti = "^[1-7{1}&,]{0,4}[1-7]{1}$"; 
+    		    Pattern patternMulti = Pattern.compile(regexMulti);
+    			
     			String inputSelect = scanner.next();
-    			System.out.println(inputSelect);
-				
-//    			DispCtrl dc2 = new DispCtrl();
-//    			String inputSelect2 = dc2.dispSentence("入力2：");
-//				System.out.println(inputSelect2);
+    			
+    			// 入力内容をマッチング
+    			Matcher matcherMulti = patternMulti.matcher(inputSelect);
+    			if (matcherMulti.matches()) {
+    				System.out.println(inputSelect + " OK");
+    			} else {
+    				System.out.println(inputSelect + " NG");
+    			}
 			
 			}
 			

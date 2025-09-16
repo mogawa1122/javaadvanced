@@ -1,7 +1,6 @@
-package util.bkup;
+package tests;
 
 import survey.SurveyTags;
-import util.TextPreparationSurveyBK;
 
 public class ExeTest {
 

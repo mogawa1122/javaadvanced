@@ -5,6 +5,9 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
+import common.DisplayChoice;
+import common.Extraction;
+import common.InputCheck;
 import survey.SurveyTags;
 import survey.TextPreparationSurvey;
 
