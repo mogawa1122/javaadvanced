@@ -37,7 +37,7 @@ public class GetAnswer {
    				
    				//タグ名を取得（itemタグ前提）
    				String tagText = ext.extContent(line, "{", "}");
-   				//textタグの番号を取得
+   				//itemタグの番号を取得
    				String tagTextContent = ext.extContent(line, "{" + tagText + "}", "{/" + tagText + "/}");	
    				
    				//次のデータを取得
@@ -53,7 +53,7 @@ public class GetAnswer {
    				ArrayList<String> list = new ArrayList<String>();
    				list.add(tagName);
    				list.add(tagContent);
-   				// mapに追加（例：textが1の選択肢がsingleAnswerで4のとき -> 1:[singleAnswer, 4]）
+   				// mapに追加（例：itemが1の選択肢がsingleAnswerで4のとき -> 1:[singleAnswer, 4]）
    				answerMap.put(tagTextContent, list);
    				
    				line = br.readLine();
