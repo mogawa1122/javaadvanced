@@ -71,7 +71,7 @@ public class SurveyExe {
 			if (target.contains(stSCJ)) {
 				
 				// singleChoiceJumpの選択肢部を取得
-	    		String contentSCJ = ext.extContent(target, "{singleChoiceJump}\n", "{/singleChoiceJump}");
+	    		String contentSCJ = ext.extContent(target, "{" + stSCJ + "}\n", "{/" + stSCJ + "}");
    	    		
 
 	    		// 選択肢出力
@@ -109,7 +109,7 @@ public class SurveyExe {
 	   	        boolean notDuplicate = true;
 
 				// multipleChoiceの選択肢部を取得
-	    		String contentMC = ext.extContent(target, "{multipleChoice}\n", "{/multipleChoice}");
+	    		String contentMC = ext.extContent(target, "{" + stMC + "}\n", "{/" + stMC + "}");
 				
 	    		// 選択肢出力
 				DisplayChoice ds = new DisplayChoice();
