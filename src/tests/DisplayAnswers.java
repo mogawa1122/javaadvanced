@@ -1,6 +1,4 @@
-package common;
-
-import java.util.Formatter;
+package tests;
 
 public class DisplayAnswers {
 
@@ -40,12 +38,6 @@ public class DisplayAnswers {
 			"7:友人関係や学校生活が良くなかった"
 		};
 	
-	/**
-	 *対象のワードが含まれた、区切り文字で囲まれた文字列を取得するメソッド
-	 * @param resultArray[][] 	アンケート集計結果
-	 * @return なし（アンケート結果を出力して終了）
-	*/
-	
     public void displayAnswers(int resultArray[][]) {
     	
    		System.out.println("■アンケート集計結果\n");
@@ -55,41 +47,24 @@ public class DisplayAnswers {
     		switch(i) {
     		case 0:
     			for (int j=0; j<SINGLE_CHOICES.length; j++) {
-    				System.out.println(formattedMessage(SINGLE_CHOICES[j], resultArray[i+1][j+1]));
+    				System.out.println("\t" + SINGLE_CHOICES[j] + "\t\t" + resultArray[i+1][j+1] + "件");
     			};
     			System.out.println();
     			break;
     		case 1:
     			for (int j=0; j<MULTI_CHOICES_GOOD.length; j++) {
-    				System.out.println(formattedMessage(MULTI_CHOICES_GOOD[j], resultArray[i+1][j+1]));
+    				System.out.println("\t" + MULTI_CHOICES_GOOD[j] + "\t\t" + resultArray[i+1][j+1] + "件");
     			};
     			System.out.println();
     			break;
     		case 2:
     			for (int j=0; j<MULTI_CHOICES_BAD.length; j++) {
-    				System.out.println(formattedMessage(MULTI_CHOICES_BAD[j], resultArray[i+1][j+1]));
+    				System.out.println("\t" + MULTI_CHOICES_BAD[j] + "\t\t" + resultArray[i+1][j+1] + "件");
     			};
     			System.out.println();
     		}
     	}
     	System.out.println("\n以上");
 
-    }
-    
-	/**
-	 *対象のワードが含まれた、区切り文字で囲まれた文字列を取得するメソッド
-	 * @param message 			アンケート選択肢
-	 * @param count 			アンケート集計数
-	 * @return formattedMessage フォーマット済アンケート結果
-	*/
-    
-    public String formattedMessage(String message, int count) {
-
-		Formatter formatter = new Formatter();
-		formatter.format("\t%-20s\t%3d件", message, count);
-		String formattedMessage = formatter.toString();
-		formatter.close();
-    	
-    	return formattedMessage;
     }
 }

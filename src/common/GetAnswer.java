@@ -35,7 +35,7 @@ public class GetAnswer {
    					break;
    				}
    				
-   				//タグ名所崇徳（textタグ前提）
+   				//タグ名を取得（itemタグ前提）
    				String tagText = ext.extContent(line, "{", "}");
    				//textタグの番号を取得
    				String tagTextContent = ext.extContent(line, "{" + tagText + "}", "{/" + tagText + "/}");	

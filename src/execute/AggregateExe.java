@@ -38,12 +38,12 @@ public class AggregateExe {
 			//１件取得
 			content = tpa.getContent(i);
 			//回答別選択肢取得
-			GetAnswer aa = new GetAnswer();
-			resultMap = aa.getAnswer(content);
+			GetAnswer ga = new GetAnswer();
+			resultMap = ga.getAnswer(content);
 			
 			//一人分のデータの回答項目を配列にカウントアップ
 		    for (String item : resultMap.keySet()) {
-		    	//回答Mapで問題番号（textタグ）をkeyとしたvalueデータを取得
+		    	//回答Mapで問題番号（itemタグ）をkeyとしたvalueデータを取得
 		        ArrayList<String> answerNo = new ArrayList<String>();
 		        answerNo = resultMap.get(item);
 	        
