@@ -65,7 +65,7 @@ public class GetAnswer {
 //   	    for (String key : answerMap.keySet()) {
 //   	        System.out.println(key + ":" + answerMap.get(key));
 //   	    }
-//   		
+   		
    	    //一人分の回答mapをreturn
    		return answerMap;
 	}

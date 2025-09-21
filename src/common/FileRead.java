@@ -11,10 +11,10 @@ import java.util.List;
 
 public class FileRead {
 
-    public List<String> fileNameFromFolder() {
+    public List<String> fileNameFromFolder(String folder) {
     	
     	List<String> fileList = new ArrayList<String>();
-    	Path folderPath = Paths.get("files/Survey/");
+    	Path folderPath = Paths.get("files/" + folder + "/");
 
     	try (DirectoryStream<Path> surveyStream = Files.newDirectoryStream(folderPath)) {
     		for (Path file : surveyStream) {
@@ -26,20 +26,20 @@ public class FileRead {
     		e.printStackTrace();
     	} 
     	
-        for(int i = 0; i < fileList.size(); i++) {
-            System.out.println(fileList.get(i));
-        }
+//        for(int i = 0; i < fileList.size(); i++) {
+//            System.out.println(fileList.get(i));
+//        }
     	
     	return fileList;
 	}
     
-    public String fileContent(String fileName) {
+    public String fileContent(String folder, String fileName) {
     	
     	String content = "";
     	
     	while (true) {
     		
-    		Path targetFile = Path.of("files/survey/" + fileName);
+    		Path targetFile = Path.of("files/" + folder + "/" + fileName);
     		try  {
 //    			System.out.println(targetFile);
     			content = Files.readAllLines(targetFile, StandardCharsets.UTF_8).toString();
