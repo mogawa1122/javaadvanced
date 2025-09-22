@@ -26,10 +26,6 @@ public class FileRead {
     		e.printStackTrace();
     	} 
     	
-//        for(int i = 0; i < fileList.size(); i++) {
-//            System.out.println(fileList.get(i));
-//        }
-    	
     	return fileList;
 	}
     
@@ -41,7 +37,6 @@ public class FileRead {
     		
     		Path targetFile = Path.of("files/" + folder + "/" + fileName);
     		try  {
-//    			System.out.println(targetFile);
     			content = Files.readAllLines(targetFile, StandardCharsets.UTF_8).toString();
     		} catch (IOException e) {
     			e.printStackTrace();
