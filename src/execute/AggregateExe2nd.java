@@ -32,15 +32,6 @@ public class AggregateExe2nd {
    			// ファイル名の拡張子以外（質問番号）を取得しmapに設定
    			surveyFileNameMap.put(surveyFileName.substring(0,surveyFileName.lastIndexOf('.')), idx++);
    		}
-   		
-//   		for (String item : surveyFileNameMap.keySet()) {
-//   			System.out.println("item:"+item+"getitem:"+surveyFileNameMap.get(item));
-//   		}
-//   		
-   		//内容確認
-   	    for (String key : surveyFileNameMap.keySet()) {
-   	        System.out.println(key + ":" + surveyFileNameMap.get(key));
-   	    }
    	    
    		//　問題ファイル（aggregateフォルダ）より問題番号一覧を取得
    		FileRead aggregateFr = new FileRead();
@@ -52,6 +43,9 @@ public class AggregateExe2nd {
    		//配列要素を50で定義（0は使用しない）
    		int arrayRow = 51;
    		int arrayCol = 51;
+   		
+   		//　userInput保存用List
+   		ArrayList<String>userInputList = new ArrayList<String>();
    		
    		//回答データ受け取り用Map
   		Map<String, ArrayList<String>> resultMap = new HashMap<String, ArrayList<String>>();
@@ -79,25 +73,17 @@ public class AggregateExe2nd {
 		        //回答を集計用配列に設定
 		        for (String answer : answers) {
 		        	if (answerNo.get(0).equals("userInput")) {
+		        		userInputList.add(answerNo.get(1));
 		        	} else {
-//		        		System.out.println("item:" + item+" "+surveyFileNameMap.get(item));
 		        		resultArray[surveyFileNameMap.get(item)][Integer.parseInt(answer)] += 1;
 		        	}
 		        }
 		    }
 		}
 
-        for (int j=0;j<10;j++) {
-        	System.out.print("["+j+"]");
-        	for (int k=0;k<10;k++) {
-        		System.out.print(" " + resultArray[j][k]);
-        	}
-        	System.out.println();
-        }
-		
 		//集計結果表示	
 		DisplayAnswers2nd da2 = new DisplayAnswers2nd();
-		da2.displayAnswers(surveyFileNameMap,resultArray);
+		da2.displayAnswers(surveyFileNameMap, resultArray, userInputList);
 	}
 
 }

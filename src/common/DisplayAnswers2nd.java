@@ -12,8 +12,6 @@ import survey.SurveyTags;
 
 public class DisplayAnswers2nd {
 
-//	private static final Object content.contains(stEOF) = content;
-
 	/**
 	 *対象のワードが含まれた、区切り文字で囲まれた文字列を取得するメソッド
 	 * @param resultArray[][] 	アンケート集計結果
@@ -21,7 +19,7 @@ public class DisplayAnswers2nd {
 	*/
 	
     @SuppressWarnings("unlikely-arg-type")
-	public void displayAnswers(Map<String, Integer> surveyFileNameMap, int resultArray[][]) {
+	public void displayAnswers(Map<String, Integer> surveyFileNameMap, int resultArray[][], ArrayList<String> userInputList) {
     	
   		String stSCJ = SurveyTags.valueOf("SINGLECHOICEJUMP").toString();
    		String stMC = SurveyTags.valueOf("MULTIPLECHOICE").toString();
@@ -31,11 +29,11 @@ public class DisplayAnswers2nd {
     	// 変数定義
     	String fileNameKey="";
     	String content="";
-    	
-        System.out.println("■アンケート集計結果\n");
+    	System.out.println("■アンケート集計結果\n");
     	
     	// ファイル名がsurveyFileNameMapに無くなるまで内容を取得するループ
         Iterator<String> keyIterator = surveyFileNameMap.keySet().iterator();
+        
         while (keyIterator.hasNext()) {
         	// surveyFileNameMapからファイル名を読込みフォルダ内のファイルの中身を取得
         	fileNameKey = keyIterator.next();
@@ -82,9 +80,6 @@ public class DisplayAnswers2nd {
     					ratio =  Math.floor(100*resultArray[answerNo][i]/sum);
     				}
     				// 回答数を取得し表示
-//    				String padRight = padRight(dispSCJ.get(0).toString(), 25, ' ');
-//    				System.out.println("長さ:"+padRight.length());
-//    				System.out.println(formattedMessage(padRight,  resultArray[answerNo][i++]));
     				System.out.println(formattedMessage("SCJ", dispSCJ.get(0),  resultArray[answerNo][i++], ratio));
     			}
     		}
@@ -109,13 +104,16 @@ public class DisplayAnswers2nd {
     				}
     				
     				// 回答数を取得し表示
-//    				String padRight = padRight(dispSCJ.get(0).toString(), 25, ' ');
-//    				System.out.println("長さ:"+padRight.length());
-//    				System.out.println(formattedMessage(padRight,  resultArray[answerNo][j++]));
-//    				System.out.println(formattedMessage("MC", dispSCJ.get(0), resultArray[answerNo][j++]));
     				System.out.println(formattedMessage("MC", dispSCJ.get(0),  resultArray[answerNo][j++], ratio));
     			}
     		}
+    		
+    		if (content.contains(stUAns)) {
+    			for (String comment : userInputList) {
+    				System.out.println(comment);
+    			}
+    		}
+    		
     		System.out.println();
         }
         System.out.println("\n以上");
@@ -145,14 +143,11 @@ public class DisplayAnswers2nd {
 		Formatter formatter = new Formatter();
 		String stChoice = "";
 		if (st.equals("SCJ")) {
-//			formatter.format("\t%-15s\t%5d件\t%.f%%", message, count, ratioFmt.format(ratio));
 			stChoice = formatter.format("%-15s", message).toString();
 		}
 		if (st.equals("MC")) {
-//			formatter.format("\t%-25s\t%5d件\t%.f%%", message, count, ratioFmt.format(ratio));
 			stChoice = formatter.format("%-25s", message).toString();	
 		}
-//		String formattedMessage = formatter.toString();
 		formatter.close();
     	
 		String formattedMessage = "\t" + stChoice + "\t" + stCount + "件" + "\t" + stRatio + "%";
