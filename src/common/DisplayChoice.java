@@ -21,12 +21,17 @@ public class DisplayChoice {
 		// 1行ずつ読み込む準備
 		String nextString = "";
 		Extraction ext = new Extraction();
-		BufferedReader br = new BufferedReader(new StringReader(content));
+		// 先頭の","を削除
+		int index = content.indexOf(",");
+		String checkedContent = content.substring(index + 1);
+//		System.out.println("cc:" +checkedContent);
+		// １行ずつ読み込む準備
+		BufferedReader br = new BufferedReader(new StringReader(checkedContent.replace(",", "\n")));
 		Map<String, ArrayList<String>> choiceMap = new HashMap<String, ArrayList<String>>();
 
    		try {	    
 
-   			String line = br.readLine();
+   			String line = br.readLine();  		
    			while (line != null) {
    				
    				String textChoice = "";
@@ -46,20 +51,31 @@ public class DisplayChoice {
    				
    				// 選択肢Mapを作成（key:選択肢番号、value（配列[0:質問内容　1:next]))
    				int branchIdx = textChoice.indexOf(".");
-   				String branch = textChoice.substring(0, branchIdx);
+   				String branch="";
+   				try {
+   					branch = textChoice.substring(0, branchIdx);
+   				} catch (StringIndexOutOfBoundsException e) {
+   					branch = "";
+   				}
 
+   				if (branch!="") {
    				// value部の配列
    				ArrayList<String> list = new ArrayList<String>();
    				list.add(textChoice);
    				list.add(nextString);
    				// mapに追加
    				choiceMap.put(branch, list);
-
+   				}
    				line = br.readLine();
    			}
    		} catch(IOException e) {
   	    		System.out.println(e);
    		}
+
+//		for (String key : choiceMap.keySet()) {
+//			System.out.print(key + " ");
+//			System.out.println(choiceMap.get(key));
+//		}
    		
    		return choiceMap;
 	}

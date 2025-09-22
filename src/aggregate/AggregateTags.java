@@ -5,6 +5,7 @@ public enum AggregateTags {
 	ITEM,
 	SINGLEANSWER,
 	MULTIANSWER,
+	USERINPUT,
 	EOF;
 
 	@Override
@@ -16,7 +17,7 @@ public enum AggregateTags {
 			aTagName = "EOF";
 		}
 		else {
-			aTagName = name().toLowerCase().replace("answer", "Answer");
+			aTagName = name().toLowerCase().replace("answer", "Answer").replace("input", "Input");
 		}
 		
 		return aTagName;
